@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>WaggL</title>
+    <script src="resources\js\app.js"></script>
+    <link rel="stylesheet" href="resources\css\diagram.css">
+</head>
+
+<title>WaggL</title>
+
+<!----------------------------------------------------------------------------------------------------
+    //  Diagram Page
+
+    //  -Created by the remarkably talented Chelsea Greco
+    //  -Provides a visual representation of the math explained on the last page
+    //  -Allows users to interact with waggle dance and see how the bees relate it to the sun
+------------------------------------------------------------------------------------------------------>
+
+<body onload='redraw()'> <!--When the page loads the diagram will draw -->
+    <div>
+        <div>
+            <h1>
+                <a href="index.html">WaggL</a>
+            </h1>
+
+            <img src="resources/images/waggle.JPG" alt="diagram explaining the waggle dance">
+
+        </div>
+
+    </div>
+
+    <div id='diagram'>
+        <canvas id="myCanvas" width="400" height="400" style="background-color:#fcd873"></canvas> <!-- animation background color/canvas-->
+
+        <script>
+            //based off of a clock animation
+            var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d')
+        canvas.width = 300; //controls canvas size width
+        canvas.height = 300; //controls canvas size  same value for a square
+        var beeflower = new Image(); //load in flower image
+        beeflower.src = "resources/images/beeflower.png" //path to image
+        var beesun = new Image(); //load in sun image
+        beesun.src = "resources/images/beesun.png" //path to image
+        var radius = canvas.height / 2 - 10;  
+        //******************************
+        //Function drawClock()
+        //draws the face of the clock/animation
+        //******************************    
+        function drawClock() {
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0 , 2 * Math.PI); //calc surface
+                ctx.fillStyle = "white"; //sets face color
+                ctx.fill();
+        }
+        //*******************************
+        //Function drawHand()
+        //reads in the position of the hand,
+        // the image to use at the end of the hand, 
+        //the color the hand should be printed
+        //Draws a clock hand on the canvas with an image on the end
+        //*******************************
+        function drawHand(pos, i, color) {
+        let length = radius * 0.8 //sets the length of hand based off of the radius of face of clock
+        let width = radius * 0.07 //sets width of hand from radius
+        let x = canvas.width/2 + length * Math.cos(pos * (Math.PI/180))//change the length to radius for outside look
+        let y = canvas.height/2 + length * Math.sin(pos * (Math.PI/180))
+        ctx.strokeStyle = color //"#000" //a29c9b black and grey
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.lineCap = "round"; //round the edges of hands
+        ctx.moveTo(canvas.width / 2, canvas.height / 2); //center
+        ctx.lineTo(x, y); //to the edge of the circle
+        ctx.stroke();
+        if(i.width > 0)
+        ctx.drawImage(i, x, y, 15, 15) //draw the hand       
+        }
+
+        //********************************
+        //Function drawNumbers()
+        //reads in the radius
+        //prints the numbers around the face of the clock/animation
+        //********************************
+        function drawNumbers(radius) {
+        var ang;
+        var num;
+        ctx.font = radius*0.15 + "px arial";
+        ctx.textBaseline="middle";
+        ctx.textAlign="center"; 
+        ctx.fillStyle = "#000"; //black font
+        let length = radius * 0.85 //how close the numbers are to the edge of the face
+        for(num = 0; num < 360; num += 30){ //print numbers 0-360 in intervals of 30
+            console.log(num);
+            ang = num - 90;
+            let x = canvas.width/2 + length * Math.cos(ang * (Math.PI/180)) //coordinate for x value
+            let y = canvas.height/2 + length * Math.sin(ang * (Math.PI/180))//coordinate for y value
+            ctx.fillText(num.toString(), x, y); //write the numbers
+         }
+        }
+
+        //***************************
+        //Function redraw()
+        //is called when the page loads
+        //calls the drawclock(), drawNumbers(), drawHand()
+        //drawHand() is called twice with different, images, and colors passed through
+        //the frist hand is the sun line, the second line is the flower is calculated based off of the sun value
+        //***************************
+        function redraw(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawClock();
+        drawNumbers(radius);
+        drawHand(parseInt(document.getElementById('hand1').value) - 90, beesun, "#a29c9b") //unit circle -90 for the off set
+        drawHand(parseInt(document.getElementById('hand1').value) -90 + parseInt(document.getElementById('angle').value), beeflower, "#000") //passes in the first hand num, image, color
+        }
+        </script>
+    </div>
+
+    <div>
+        <!-- Prints text and input boxes and button respectively-->
+        <br>
+        <small>The position of the sun (grey line)</small>
+        <br>
+        <input type="number" min ="0" max = "360" id="hand1" value="0"> <!-- value controls the angle of the hands/lines-->
+        <br>
+        <br>
+        <small>The angle the bee dances tells where pollen is (black line)</small>
+        <br>
+        <input type="number" min ="0" max = "360" id="angle" value="0">
+        <br>
+        <br>
+        <button onclick="redraw()">Change Angle</button> 
+        <br>
+        <br>
+        <br>
+
+
+    </div>
+
+    <div>
+        <br>
+        <button id="testButton">
+            <a id="testButtonText" href="video-select.html">See the data we've collected!</a>
+        </button>
+        <br>
+    </div>
+
+</body>
+
+</html>

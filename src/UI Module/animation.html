@@ -1,0 +1,81 @@
+<html>
+   <head>
+      <title>Bee Project</title>
+   </head>
+   <body onload='redraw()'> <!-- loads everything before click -->
+   	<button onclick='redraw()'>REDRAW</button>
+	<canvas id='myCanvas' width='150' height='150' style="background-color:#fcd873">Bad browser noob</canvas>
+	<input type='number' id='hand1' value='40'>
+	<input type ='number' id='angle' value='50'>
+	<!-- <input type='number' id='hand2' value='99'> -->
+	 <script>
+	var canvas = document.getElementById('myCanvas');
+	var ctx = canvas.getContext('2d')
+	canvas.width = 150;
+	canvas.height = 150;
+	var beeflower = new Image();
+	beeflower.src = "beeflower.png"
+	var beesun = new Image();
+	beesun.src = "beesun.png"
+	var radius = canvas.height / 2 - 10;
+	function drawClock() {
+		ctx.beginPath();
+  		ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0 , 2 * Math.PI);
+  		ctx.fillStyle = "white";
+ 	 	ctx.fill();
+	}
+
+	function drawNumbers(radius) {
+        var ang;
+        var num;
+        ctx.font = radius*0.15 + "px arial";
+        ctx.textBaseline="middle";
+        ctx.textAlign="center";
+        ctx.fillStyle = "#000";
+        let length = radius * 0.85 
+        for(num = 0; num < 360; num += 30){
+            console.log(num);
+            ang = num - 90;
+            let x = canvas.width/2 + length * Math.cos(ang * (Math.PI/180))//change the length to radius for outside look
+            let y = canvas.height/2 + length * Math.sin(ang * (Math.PI/180))
+            ctx.fillText(num.toString(), x, y);
+            console.log(x + "," + y)
+         }
+	}
+
+	function drawHand(pos, i, color) {
+	//console.log(pos)
+    	let length = radius * 0.8 //sets the length get rid of 0.8
+    	let width = radius * 0.07
+    	let x = canvas.width/2 + length * Math.cos(pos * (Math.PI/180))//change the length to radius for outside look
+    	let y = canvas.height/2 + length * Math.sin(pos * (Math.PI/180))
+    	ctx.strokeStyle = color //"#000" //a29c9b
+    	ctx.beginPath();
+    	ctx.lineWidth = width;
+    	ctx.lineCap = "round";
+    	//ctx.moveTo(0,0);
+    	ctx.moveTo(canvas.width / 2, canvas.height / 2);
+    	//ctx.rotate(pos);
+    	ctx.lineTo(x, y);
+    	ctx.stroke();
+    	//ctx.rotate(-pos);
+    	if(i.width > 0)
+    	ctx.drawImage(i, x, y, 15, 15)    	
+	}
+
+	function redraw(){
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+   	drawClock();
+	drawNumbers(radius);
+   	//ctx.translate(radius, radius);
+   	//if(beesun.width > 0)
+   	//ctx.drawImage(beesun, 75, 75, 50, 50);
+   	//if(beeflower.width > 0) //incase the image doesn't load in time
+   	//ctx.drawImage(beeflower, 0,0, 50,50);
+   	drawHand(parseInt(document.getElementById('hand1').value), beesun, "#a29c9b") //unit circle 
+    	drawHand(parseInt(document.getElementById('hand1').value) + parseInt(document.getElementById('angle').value), beeflower, "#000") // the 20 is the bee angle
+	}
+
+      </script>
+   </body>
+</html>

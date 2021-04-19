@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>WaggL</title>
+    <script src="resources\js\app.js"></script>
+    <link rel="stylesheet" href="resources\css\index.css">
+</head>
+
+<title>WaggL</title>
+
+<!----------------------------------------------------------------------------------------------------
+    // HomePage (Index.html)
+
+    //  -Has a nice picture of a bee and introduces the project
+    //  -Onload, a fact wheel is started. This shuffles through facts that are
+    //   predefined in the body of app.js
+    //  -Contains a link to the next page
+    //  -All pages contain a link to the homepage embedded in the title
+------------------------------------------------------------------------------------------------------>
+
+<body onload="startCycle()">
+<div>
+    <div>
+        <h1>
+            <a href="index.html">WaggL</a>
+        </h1>
+
+        <img src="resources/images/bee-splash.JPG" alt="bee on a flower">
+
+    </div>
+
+    <!--Fact Wheel Section-->
+    <div>
+        <b>Bee Facts:</b>
+    </div>
+
+    <div id="factWheel">
+        A bee's brain is as small as a sesame seed.
+    </div>
+
+
+    <button id="commButton">
+        <a id="commButtonText" href="communication.html">See how it works!</a>
+    </button>
+
+</div>
+    
+</body>
+</html>

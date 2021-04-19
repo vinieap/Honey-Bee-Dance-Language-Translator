@@ -1,0 +1,15 @@
+# Videos
+*.mp4
+*.avi
+
+# Pickled Files
+*.pkl
+*.txt
+
+#Byte-Compiled/ Optimized / DLL Files
+__pycache__/
+*.py[cod]
+
+# UI Data
+processedVideos.txt
+src/UI Module/resources/js/app.js

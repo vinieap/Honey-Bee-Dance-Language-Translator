@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>WaggL</title>
+    <script src="resources\js\app.js"></script>  <!--links app.js to define all function calls-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!--Ajax, not used-->
+    <link rel="stylesheet" href="resources\css\video-select.css"> <!--links css file for styling-->
+</head>
+
+<!----------------------------------------------------------------------------------------------------
+    // Video Selection Page
+
+    //  -'videoSection' is the main component of this page
+    //  -'populate()' is a function that takes a txt or json file of output video names
+    //  -Using those names, it creates HTML code for video and iFrame objects
+    //  -The HTML strings for these objects is written over this section, producing the videos and their data
+------------------------------------------------------------------------------------------------------>
+<title>WaggL</title>
+
+<body>
+    <div>
+        <div>
+            <h1>
+                <a href="index.html">WaggL</a>
+            </h1>
+
+        </div>
+
+        <div id="videoSection">
+            Select the most recent "filenames.txt" to begin<br>
+            <input id="txt" type="file" accept=".txt,.json" onchange="populate(this)"/>
+            </button>
+        </div>
+
+        <br>
+<!---------------------------------------------------------------------------------------------------------------------------------
+    // Mapping Module
+    //  -Background image, pin image, and coordinate boxes are ready to go
+    //  -Skeleton of an 'addPin()' function are in app.js
+    //  -This will simply relate the inputted coordinates to the position on the background image
+    //     -Can be done by altering CSS with JS commands or injecting HTML of a new pin each time
+    //     -Up to future team
+
+        <div class="mappingModule">
+            <img class="background"src="resources/images/scienceMuseumEdit.png" alt="map of the science museum's surroundings">
+            <img class="pin" style="max-height:30px;max-width:25px;position:absolute; top:50%; left:50%;" src="resources/images/PngItem_5441588.png" alt="location pin">
+        </div>
+
+        <div>
+            <br>
+            Coordinates: X (
+            <input type="number" id="xcoord"> ) Y (
+            <input type="number" id="ycoord"> ) 
+            <button type="button" onclick="addPin()">Locate!</button>
+            <br><br>
+        </div>
+
+    ----------------------------------------------------------------------------------------------------------------------------->
+
+    </div>
+    
+
+</body>
+
+</html>
